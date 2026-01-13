@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Linkedin, Instagram, MessageCircle, CheckCircle2, X } from "lucide-react";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -19,31 +20,25 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json" 
-        },
-        body: JSON.stringify({
-          access_key: "ecb59b87-b91a-46a9-bfd0-e6f4840d06ce", // Your Web3Forms access key
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          message: formData.message,
-          subject: `New Contact Form Submission from ${formData.name}`,
-        }),
-      });
+      const { error } = await supabase
+        .from('leads')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            message: formData.message
+          }
+        ]);
 
-      const result = await response.json();
-      
-      if (result.success) {
+      if (!error) {
         setShowPopup(true);
         setFormData({ name: "", email: "", company: "", message: "" });
-        
+
         // Auto-hide popup after 4 seconds
         setTimeout(() => setShowPopup(false), 4000);
       } else {
-        console.error("Form submission failed:", result);
+        console.error("Form submission failed:", error);
         alert("Failed to send message. Please try again.");
       }
     } catch (error) {
@@ -57,7 +52,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/the-genworks/" },
     { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/thegenworks" },
-    { icon: MessageCircle, label: "Email", href: "mailto:thegenworksteam@gmail.com" }
+    { icon: MessageCircle, label: "Email", href: "mailto:sales@thegenworks.com" }
   ];
 
   return (
@@ -150,11 +145,11 @@ const Contact = () => {
       {showPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setShowPopup(false)}
           />
-          
+
           {/* Popup Content */}
           <div className="relative bg-gradient-to-br from-card via-card to-muted border-2 border-primary/50 rounded-2xl p-8 md:p-12 max-w-md w-full shadow-2xl animate-scale-in">
             {/* Close Button */}

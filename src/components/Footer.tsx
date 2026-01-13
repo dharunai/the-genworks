@@ -1,7 +1,7 @@
 import { Linkedin, Instagram, Mail } from "lucide-react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = 2026;
 
   return (
     <footer className="relative border-t border-border bg-background">
@@ -20,7 +20,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/thegenworks" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted hover:bg-primary/20 transition-colors group">
                 <Instagram className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </a>
-              <a href="mailto:thegenworksteam@gmail.com" className="p-2 rounded-lg bg-muted hover:bg-primary/20 transition-colors group">
+              <a href="mailto:sales@thegenworks.com" className="p-2 rounded-lg bg-muted hover:bg-primary/20 transition-colors group">
                 <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </a>
             </div>
