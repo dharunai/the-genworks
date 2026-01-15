@@ -4,6 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Linkedin, Instagram, MessageCircle, CheckCircle2, X } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,8 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      // 1. Submit to Supabase
+      const { error: supabaseError } = await supabase
         .from('leads')
         .insert([
           {
@@ -31,19 +33,40 @@ const Contact = () => {
           }
         ]);
 
-      if (!error) {
-        setShowPopup(true);
-        setFormData({ name: "", email: "", company: "", message: "" });
+      if (supabaseError) throw supabaseError;
 
-        // Auto-hide popup after 4 seconds
-        setTimeout(() => setShowPopup(false), 4000);
-      } else {
-        console.error("Form submission failed:", error);
-        alert("Failed to send message. Please try again.");
+      // 2. Submit to Email (FormSubmit.co)
+      try {
+        await fetch(`https://formsubmit.co/ajax/${import.meta.env.VITE_CONTACT_EMAIL || 'sales@thegenworks.com'}`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            company: formData.company,
+            message: formData.message,
+            _subject: `New Lead: ${formData.name}`,
+            _template: 'table'
+          })
+        });
+      } catch (emailError) {
+        console.error("Email submission failed:", emailError);
+        // We don't block success if email fails, as DB is primary source of truth
       }
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("An error occurred. Please try again.");
+
+      setShowPopup(true);
+      setFormData({ name: "", email: "", company: "", message: "" });
+      toast.success("Message sent successfully!");
+
+      // Auto-hide popup after 4 seconds
+      setTimeout(() => setShowPopup(false), 4000);
+
+    } catch (error: any) {
+      console.error("Form submission failed:", error);
+      toast.error("Failed to send message: " + (error.message || "Unknown error"));
     } finally {
       setIsSubmitting(false);
     }
