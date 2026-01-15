@@ -49,7 +49,8 @@ const Contact = () => {
             company: formData.company,
             message: formData.message,
             _subject: `New Lead: ${formData.name}`,
-            _template: 'table'
+            _template: 'table',
+            _autoresponse: `Hi ${formData.name},\n\nThank you for reaching out to GenWorks! We have received your message and will get back to you within 24 hours.\n\nLet's build something amazing together.\n\nBest,\nThe GenWorks Team`
           })
         });
       } catch (emailError) {
