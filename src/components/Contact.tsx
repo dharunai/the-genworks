@@ -50,7 +50,26 @@ const Contact = () => {
             message: formData.message,
             _subject: `New Lead: ${formData.name}`,
             _template: 'table',
-            _autoresponse: `Hi ${formData.name},\n\nThank you for reaching out to GenWorks! We have received your message and will get back to you within 24 hours.\n\nLet's build something amazing together.\n\nBest,\nThe GenWorks Team`
+            _autoresponse: `Dear ${formData.name},
+
+Thank you for contacting TheGenWorks. We have received your inquiry.
+
+Message Details:
+--------------------------------------------------
+Name: ${formData.name}
+Company: ${formData.company || 'N/A'}
+Email: ${formData.email}
+
+Message:
+${formData.message}
+--------------------------------------------------
+
+Our team will review your message and get back to you within 24 hours.
+
+Best regards,
+
+The GenWorks Team
+www.thegenworks.com`
           })
         });
       } catch (emailError) {
@@ -175,7 +194,7 @@ const Contact = () => {
           />
 
           {/* Popup Content */}
-          <div className="relative bg-gradient-to-br from-card via-card to-muted border-2 border-primary/50 rounded-2xl p-8 md:p-12 max-w-md w-full shadow-2xl animate-scale-in">
+          <div className="relative bg-card border border-border rounded-xl p-8 md:p-10 max-w-md w-full shadow-2xl animate-scale-in">
             {/* Close Button */}
             <button
               onClick={() => setShowPopup(false)}
@@ -187,27 +206,20 @@ const Contact = () => {
             {/* Success Icon */}
             <div className="flex justify-center mb-6">
               <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse" />
-                <CheckCircle2 className="relative w-20 h-20 text-primary animate-bounce" />
+                <div className="absolute inset-0 bg-primary/10 rounded-full blur-xl" />
+                <CheckCircle2 className="relative w-16 h-16 text-primary" />
               </div>
             </div>
 
             {/* Title */}
-            <h3 className="font-rubik font-bold text-3xl md:text-4xl text-center mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Message Sent!
+            <h3 className="font-rubik font-bold text-2xl md:text-3xl text-center mb-3 text-foreground">
+              Message Sent
             </h3>
 
             {/* Description */}
-            <p className="font-inter text-center text-muted-foreground text-base md:text-lg leading-relaxed">
+            <p className="font-inter text-center text-muted-foreground text-base leading-relaxed">
               Thank you for reaching out! We'll get back to you within 24 hours.
             </p>
-
-            {/* Decorative Element */}
-            <div className="mt-8 flex justify-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0ms' }} />
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '150ms' }} />
-              <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" style={{ animationDelay: '300ms' }} />
-            </div>
           </div>
         </div>
       )}

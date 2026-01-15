@@ -18,16 +18,14 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-lg' : 'bg-background/80 backdrop-blur-sm border-b border-border/50'
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-lg' : 'bg-background/80 backdrop-blur-sm border-b border-border/50'
+      }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo with slide animation */}
-          <div className={`flex items-center transition-all duration-700 ${
-            isLogoVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-          }`}>
-            <img src="/favicon.png" alt="TheGenWorks" className="h-20 w-auto" />
+          <div className={`flex items-center transition-all duration-700 ${isLogoVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+            }`}>
+            <img src="/thegenworks-logo.png" alt="TheGenWorks" className="h-20 w-auto" />
           </div>
 
           {/* Navigation Links */}
@@ -48,7 +46,7 @@ const Navigation = () => {
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <Button 
+            <Button
               size="sm"
               asChild
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-rubik font-semibold hover:scale-105 transition-all duration-300"

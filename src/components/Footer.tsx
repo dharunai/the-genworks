@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Logo & Tagline */}
           <div className="flex flex-col items-start md:col-span-2">
-            <img src="/favicon.png" alt="TheGenWorks" className="h-14 mb-4" />
+            <img src="/thegenworks-logo.png" alt="TheGenWorks" className="h-14 mb-4" />
             <p className="font-inter text-sm text-muted-foreground leading-relaxed max-w-md">
               Where Next-Gen Marketing Works. AI-powered digital ecosystems for smarter business growth.
             </p>

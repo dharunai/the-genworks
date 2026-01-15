@@ -45,11 +45,11 @@ const WhatsAppChat = () => {
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
                                         <div className="relative">
-                                            <div className="w-18 h-18 bg-card rounded-full flex items-center justify-center p-2 border-2 border-primary/30">
+                                            <div className="w-12 h-12 bg-card rounded-full flex items-center justify-center p-2 border-2 border-primary/30">
                                                 <img src="/gen-logo.png" alt="Gen" className="w-full h-full object-contain" />
                                             </div>
                                             {/* Online indicator */}
-                                            <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-secondary rounded-full border-2 border-card" />
+                                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-card" />
                                         </div>
                                         <div>
                                             <h3 className="font-rubik font-bold text-base text-foreground">Gen</h3>
@@ -141,42 +141,32 @@ const WhatsAppChat = () => {
                     </div>
                 )}
 
-                {/* Main Chat Button */}
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="relative group"
-                    aria-label="Chat with Gen"
-                >
-                    {/* Subtle glow effect only on main button */}
-                    {!isOpen && (
+                {/* Main Chat Button - Only show when closed */}
+                {!isOpen && (
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="relative group"
+                        aria-label="Chat with Gen"
+                    >
                         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-lg opacity-40 group-hover:opacity-60 transition-opacity" />
-                    )}
 
-                    {/* Button */}
-                    <div className="relative w-16 h-16 bg-gradient-to-br from-primary via-primary to-secondary rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 cursor-pointer">
-                        {isOpen ? (
-                            <X className="w-7 h-7 text-primary-foreground" />
-                        ) : (
+                        <div className="relative w-16 h-16 bg-gradient-to-br from-primary via-primary to-secondary rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 cursor-pointer">
                             <MessageCircle className="w-7 h-7 text-primary-foreground" />
-                        )}
-                    </div>
+                        </div>
 
-                    {/* Notification Badge */}
-                    {!isOpen && (
+                        {/* Notification Badge */}
                         <div className="absolute -top-1 -right-1 w-5 h-5 bg-secondary rounded-full flex items-center justify-center shadow-lg">
                             <span className="text-xs font-bold text-secondary-foreground">1</span>
                         </div>
-                    )}
 
-                    {/* Tooltip */}
-                    {!isOpen && (
+                        {/* Tooltip */}
                         <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                             <div className="bg-card border border-primary/50 rounded-lg px-3 py-2 shadow-xl whitespace-nowrap">
                                 <p className="font-inter text-xs text-foreground font-semibold">Chat with Gen</p>
                             </div>
                         </div>
-                    )}
-                </button>
+                    </button>
+                )}
             </div>
         </>
     );
