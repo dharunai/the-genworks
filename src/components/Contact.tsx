@@ -84,9 +84,9 @@ www.thegenworks.com`
       // Auto-hide popup after 4 seconds
       setTimeout(() => setShowPopup(false), 4000);
 
-    } catch (error: any) {
+    } catch (error) {
       console.error("Form submission failed:", error);
-      toast.error("Failed to send message: " + (error.message || "Unknown error"));
+      toast.error("Failed to send message: " + ((error as Error).message || "Unknown error"));
     } finally {
       setIsSubmitting(false);
     }
