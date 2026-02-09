@@ -21,23 +21,37 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Submit to Supabase
-      const { error: supabaseError } = await supabase
-        .from('leads')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            company: formData.company,
-            message: formData.message
-          }
-        ]);
+      let supabaseSuccess = false;
+      let emailSuccess = false;
+      let errors = [];
 
-      if (supabaseError) throw supabaseError;
+      // 1. Submit to Supabase (Attempt)
+      try {
+        const { error: supabaseError } = await supabase
+          .from('leads')
+          .insert([
+            {
+              name: formData.name,
+              email: formData.email,
+              company: formData.company,
+              message: formData.message
+            }
+          ]);
+
+        if (supabaseError) {
+          console.error("Supabase submission error:", supabaseError);
+          errors.push(`Database: ${supabaseError.message}`);
+        } else {
+          supabaseSuccess = true;
+        }
+      } catch (err) {
+        console.error("Supabase submission exception:", err);
+        errors.push("Database connection failed");
+      }
 
       // 2. Submit to Email (FormSubmit.co)
       try {
-        await fetch(`https://formsubmit.co/ajax/${import.meta.env.VITE_CONTACT_EMAIL || 'sales@thegenworks.com'}`, {
+        const response = await fetch(`https://formsubmit.co/ajax/${import.meta.env.VITE_CONTACT_EMAIL || 'sales@thegenworks.com'}`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
@@ -72,17 +86,29 @@ The GenWorks Team
 www.thegenworks.com`
           })
         });
+
+        if (response.ok) {
+          emailSuccess = true;
+        } else {
+          console.error("Email submission failed:", await response.text());
+          errors.push("Email submission failed");
+        }
       } catch (emailError) {
-        console.error("Email submission failed:", emailError);
-        // We don't block success if email fails, as DB is primary source of truth
+        console.error("Email submission exception:", emailError);
+        errors.push("Email service unreachable");
       }
 
-      setShowPopup(true);
-      setFormData({ name: "", email: "", company: "", message: "" });
-      toast.success("Message sent successfully!");
+      // 3. Determine overall success
+      if (supabaseSuccess || emailSuccess) {
+        setShowPopup(true);
+        setFormData({ name: "", email: "", company: "", message: "" });
+        toast.success("Message sent successfully!");
 
-      // Auto-hide popup after 4 seconds
-      setTimeout(() => setShowPopup(false), 4000);
+        // Auto-hide popup after 4 seconds
+        setTimeout(() => setShowPopup(false), 4000);
+      } else {
+        throw new Error(errors.join(", ") || "All submission methods failed");
+      }
 
     } catch (error) {
       console.error("Form submission failed:", error);

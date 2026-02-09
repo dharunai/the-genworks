@@ -23,9 +23,10 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo with slide animation */}
-          <div className={`flex items-center transition-all duration-700 ${isLogoVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+          <div className={`flex items-center gap-3 transition-all duration-700 ${isLogoVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
             }`}>
-            <img src="/thegenworks-logo.png" alt="TheGenWorks" className="h-20 w-auto" />
+            <img src="/thegenworks-logo.png" alt="TheGenWorks" className="h-12 w-auto" />
+            <span className="font-rubik font-bold text-xl text-foreground">The GenWorks</span>
           </div>
 
           {/* Navigation Links */}
