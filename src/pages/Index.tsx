@@ -8,10 +8,12 @@ import CTA from "@/components/CTA";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppChat from "@/components/WhatsAppChat";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background font-inter scroll-smooth">
+      <SEO />
       <Navigation />
       <Hero />
       <TechStackMarquee />

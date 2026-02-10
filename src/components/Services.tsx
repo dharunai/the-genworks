@@ -1,36 +1,57 @@
-import { Megaphone, Code, Workflow, Brain, MessageSquare, TrendingUp } from "lucide-react";
+import { Megaphone, Code, Workflow, Brain, MessageSquare, TrendingUp, Users, Server, CreditCard, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Services = () => {
   const services = [
     {
+      icon: Users,
+      title: "CRM & Lead Management Systems",
+      description: "Enterprise-grade CRM systems built for scaling teams. From intelligent lead capture and automated follow-ups to real-time dashboards and pipeline tracking, our systems streamline your customer journey. Integrate email automation, WhatsApp sync, internal team workflows, and performance analytics into one centralized business engine built for growth."
+    },
+    {
+      icon: Server,
+      title: "API Integrations & Backend Systems",
+      description: "API-first backend systems engineered for performance. We build secure, scalable backend architectures powered by REST APIs and modern frameworks. Seamlessly connect payment gateways, third-party platforms, CRMs, marketing tools, and internal systems into one unified infrastructure. Our API-first approach ensures flexibility, automation, and long-term scalability for your digital ecosystem."
+    },
+    {
+      icon: MessageSquare,
+      title: "WhatsApp & Instagram Automation",
+      description: "AI-powered automation across messaging platforms. Automate customer engagement with intelligent chat workflows across WhatsApp and Instagram. We develop AI-driven lead qualification bots, automated responses, CRM synchronization, broadcast systems, and sales funnel automation. Turn conversations into conversions with real-time automation and data-driven marketing intelligence."
+    },
+    {
+      icon: CreditCard,
+      title: "FinTech & Business Web Apps",
+      description: "Secure financial-grade web applications built for scale. We develop secure financial dashboards, payment processing systems, analytics engines, and custom business web applications. Built with scalability, compliance, and performance in mind, our FinTech solutions empower startups and enterprises to manage transactions, data, and growth with confidence."
+    },
+    {
       icon: Megaphone,
       title: "Digital Marketing",
-      description: "Data-driven campaigns that reach the right audience and convert."
+      description: "We create data-driven digital marketing strategies that combine SEO, performance advertising, content marketing, and conversion-focused funnels to generate qualified leads and measurable growth. From search engine optimization and Google Ads to social media campaigns and retargeting systems, our approach ensures your brand reaches the right audience and converts consistently across digital channels."
     },
     {
       icon: Code,
       title: "Website Development",
-      description: "Fast, responsive, and beautiful websites built with modern tech."
+      description: "We design and develop fast, responsive, and SEO-optimized websites using modern frameworks and scalable architectures. From corporate websites and landing pages to dynamic web applications and CMS platforms, our development process prioritizes performance, user experience, and search visibility to help businesses build a strong digital presence."
     },
     {
       icon: Workflow,
       title: "Workflow Automation",
-      description: "Streamline operations and save hours with smart automation."
+      description: "We build intelligent workflow automation systems that integrate APIs, CRM platforms, marketing tools, and internal processes to eliminate repetitive tasks and improve efficiency. By automating operations, approvals, notifications, and customer journeys, we help businesses save time, reduce manual errors, and scale operations with structured automation infrastructure."
     },
     {
       icon: Brain,
       title: "Custom Gen AI Tools",
-      description: "Tailored AI solutions that solve your unique business challenges."
+      description: "We develop custom generative AI tools and AI-powered applications tailored to your business needs. From intelligent document processing and automated content systems to predictive analytics and smart decision-support tools, our AI solutions enhance productivity, streamline workflows, and unlock data-driven innovation across your organization."
     },
     {
       icon: MessageSquare,
       title: "RAG Chatbots & Internal Trainers",
-      description: "AI assistants that understand your data and empower your team."
+      description: "We build advanced RAG-based chatbots and AI knowledge assistants that integrate with your internal data, documents, and systems. These intelligent bots provide accurate responses, support teams in real time, automate customer interactions, and transform your knowledge base into an accessible, AI-driven training and support system."
     },
     {
       icon: TrendingUp,
       title: "Business Strategy & Consulting",
-      description: "Strategic guidance to scale smarter with AI and automation."
+      description: "We provide technology-driven business strategy and digital transformation consulting focused on AI, automation, and scalable infrastructure. By aligning technology implementation with business objectives, we help startups and enterprises optimize operations, increase efficiency, and build sustainable growth systems for long-term success."
     }
   ];
 
@@ -38,7 +59,7 @@ const Services = () => {
     <section id="services" className="py-20 md:py-32 bg-background relative overflow-hidden">
       {/* Subtle grid pattern background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00d9ff05_1px,transparent_1px),linear-gradient(to_bottom,#00d9ff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12 md:mb-20 animate-fade-in">
           <h2 className="font-rubik font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-4 mb-4 md:mb-6 px-4 relative inline-block group cursor-default">
@@ -53,7 +74,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto mb-16">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -64,10 +85,10 @@ const Services = () => {
               >
                 {/* Gradient accent line on top */}
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 <div className="relative">
                   <div className="mb-4 md:mb-6">
                     <div className="inline-flex p-2.5 md:p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/20">
@@ -84,6 +105,27 @@ const Services = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <p className="font-inter text-muted-foreground mb-6 text-lg">
+            Need a fully customized solution? We build tailored systems based on your business model.
+          </p>
+          <Button
+            size="lg"
+            asChild
+            className="group font-rubik font-semibold text-base px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 hover:scale-105"
+          >
+            <a
+              href="https://calendar.app.google/JqP12YySpBDSHQjcA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discuss Your Project
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </Button>
         </div>
       </div>
     </section>
